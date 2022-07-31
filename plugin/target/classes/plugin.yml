@@ -1,0 +1,5 @@
+name: 0xLand
+author: Matt Lefebvre
+api-version: 1.19
+main: io.zeroexland.ZeroExLandPlugin
+version: 1.0
