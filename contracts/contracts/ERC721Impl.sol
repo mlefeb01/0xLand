@@ -34,7 +34,7 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
         override
         returns (uint256 balance)
     {
-        return 0;
+        return _balances[owner];
     }
 
     /**
