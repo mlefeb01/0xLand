@@ -1,0 +1,17 @@
+{
+  "name": "0xland",
+  "version": "1.0.0",
+  "description": "COMP4060 Final Project - FCFS NFT-Based Land Ownership in Minecraft",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.7.2"
+  }
+}
