@@ -40,13 +40,15 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
     /**
      * 
      */
-    function ownerOf(uint256 tokenId)
+    function ownerOf(uint256 _tokenId)
         public
         view
         override
-        returns (address owner)
+        returns (address)
     {
-        return address(0);
+        address owner = _owners[_tokenId];
+        require(owner != address(0), "TokenId not minted");
+        return owner;
     }
 
     /**
