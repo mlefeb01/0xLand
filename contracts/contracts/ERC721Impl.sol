@@ -122,13 +122,13 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
     /**
      * 
      */
-    function isApprovedForAll(address owner, address operator)
+    function isApprovedForAll(address _owner, address _operator)
         public
         view
         override
         returns (bool)
     {
-        return false;
+        return _operators[_owner][_operator];
     }
 
     // ERC721Metadata
