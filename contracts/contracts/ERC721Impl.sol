@@ -165,7 +165,7 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
      * 
      */
     function totalSupply() public view override returns (uint256) {
-        return 0;
+        return _supply;
     }
 
     /**
