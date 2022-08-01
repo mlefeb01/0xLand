@@ -95,10 +95,16 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
     /**
      * 
      */
-    function setApprovalForAll(address operator, bool _approved)
+    function setApprovalForAll(address _operator, bool _approved)
         public
         override
-    {}
+    {
+        if (_approved) {
+            _operators[msg.sender][_operator] = true;
+        } else {
+            delete _operators[msg.sender][_operator];
+        }
+    }
 
     /**
      * 
