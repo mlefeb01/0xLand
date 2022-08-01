@@ -28,13 +28,13 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
     /**
      * 
      */
-    function balanceOf(address owner)
+    function balanceOf(address _owner)
         public
         view
         override
-        returns (uint256 balance)
+        returns (uint256)
     {
-        return _balances[owner];
+        return _balances[_owner];
     }
 
     /**
