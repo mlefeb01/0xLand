@@ -82,7 +82,15 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
     /**
      * 
      */
-    function approve(address to, uint256 tokenId) public override {}
+    function approve(address _approved, uint256 _tokenId) public override {
+            address owner = _owners[_tokenId];
+            require(msg.sender == owner || _operators[owner][msg.sender], "You are not owner or operator");
+            if (_approved == address(0)) {
+                delete _approvals[_tokenId];
+            } else {
+                _approvals[_tokenId] = _approved;
+            }
+    }
 
     /**
      * 
