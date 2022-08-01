@@ -20,7 +20,7 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
      */
     constructor(string memory name_, string memory symbol_) {
         _name = name_;
-        symbol_ = symbol_;
+        _symbol = symbol_;
     }
 
     // ERC721
