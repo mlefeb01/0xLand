@@ -1,6 +1,7 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
 import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
@@ -55,29 +56,56 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
      * 
      */
     function safeTransferFrom(
-        address from,
-        address to,
-        uint256 tokenId,
-        bytes calldata data
-    ) public override {}
+        address _from,
+        address _to,
+        uint256 _tokenId,
+        bytes memory data
+    ) public override {
+        transferFrom(_from, _to, _tokenId);
+        // When transfer is complete, this function checks if `_to` is a smart contract (code size > 0)
+        if (_to.code.length > 0) {
+            bytes4 result = IERC721Receiver(_to).onERC721Received(msg.sender, _from, _tokenId, data);
+            require(result == bytes4(keccak256("onERC721Received(address,address,uint256,bytes)")), "IERC721Receiver error");
+        }
+    }
 
     /**
      * 
      */
     function safeTransferFrom(
-        address from,
-        address to,
-        uint256
-    ) public override {}
+        address _from,
+        address _to,
+        uint256 _tokenId
+    ) public override {
+        safeTransferFrom(_from, _to, _tokenId, "");
+    }
 
     /**
      * 
      */
     function transferFrom(
-        address from,
-        address to,
-        uint256 tokenId
-    ) public override {}
+        address _from,
+        address _to,
+        uint256 _tokenId
+    ) public override {
+        // Throws if `_tokenId` is not a valid NFT
+        address owner = _owners[_tokenId];
+        require(owner != address(0), "TokenId not minted");
+        // Throws unless `msg.sender` is the current owner, an authorized operator, or the approved address for this NFT
+        require(msg.sender == owner || _operators[owner][msg.sender] || _approvals[_tokenId] == msg.sender, "No permission to transfer");
+        // Throws if `_from` is not the current owner
+        require(_from == owner, "From is not current owner");
+        // Throws if `_to` is the zero address
+        require(_to != address(0), "To address is zero address");
+
+        _balances[_from]--;
+        _balances[_to]++;
+        _owners[_tokenId] = _to;
+        
+        delete _approvals[_tokenId];
+
+        emit Transfer(_from, _to, _tokenId);
+    }
 
     /**
      * 
