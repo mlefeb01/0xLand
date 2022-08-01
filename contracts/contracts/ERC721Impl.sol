@@ -171,25 +171,26 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
     /**
      * 
      */
-    function tokenOfOwnerByIndex(address owner, uint256 index)
+    function tokenOfOwnerByIndex(address _owner, uint256 _index)
         public
         view
         override
         returns (uint256)
     {
-        return 0;
+        return 0; 
     }
 
     /**
      * 
      */
-    function tokenByIndex(uint256 index)
+    function tokenByIndex(uint256 _index)
         public
         view
         override
         returns (uint256)
     {
-        return 0;
+        require(_index < totalSupply(), "Index out of bounds");
+        return _tokenIds[_index];
     }
 
     // ERC165
