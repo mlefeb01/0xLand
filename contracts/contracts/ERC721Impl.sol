@@ -109,13 +109,14 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
     /**
      * 
      */
-    function getApproved(uint256 tokenId)
+    function getApproved(uint256 _tokenId)
         public
         view
         override
-        returns (address operator)
+        returns (address)
     {
-        return address(0);
+        require(_owners[_tokenId] != address(0), "Token Id not valid");
+        return _approvals[_tokenId];
     }
 
     /**
