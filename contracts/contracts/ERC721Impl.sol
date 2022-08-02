@@ -205,7 +205,25 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
         override
         returns (uint256)
     {
-        return 0; 
+        require(_owner != address(0), "Zero Adress");
+        require(_index < balanceOf(_owner), "ERC721: owner index out of bounds");
+        
+        
+        
+        // // total supply is the token count
+        uint256 total = totalSupply();
+        uint256 count = 0; 
+
+        
+        for (uint256 i = 0; i < total; i++){
+            if (_owner == _owners[tokenByIndex(i)]){
+                count++; 
+            }
+
+            if(count - 1 == _index){
+                return tokenByIndex(i);
+            }
+        }
     }
 
     /**
@@ -218,6 +236,7 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
         returns (uint256)
     {
         require(_index < totalSupply(), "Index out of bounds");
+        
         return _tokenIds[_index];
     }
 
