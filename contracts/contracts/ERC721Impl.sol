@@ -262,8 +262,15 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
 
     // Other
 
-    function mint(address to, uint256 tokenId) internal {
+    function mint(address _to, uint256 _tokenId) internal {
+        require(msg.sender == _to, "You can only mint for yourself!");
+        require(_owners[_tokenId] == address(0), "NFT with this tokenID already exists!");
 
+        _balances[_to]++;
+        _owners[_tokenId] = _to;
+
+        _supply++;
+        _tokenIds.push(_tokenId);
     } 
 
 }
