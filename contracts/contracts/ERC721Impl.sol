@@ -118,6 +118,7 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
             } else {
                 _approvals[_tokenId] = _approved;
             }
+            emit Approval(owner, _approved, _tokenId);
     }
 
     /**
@@ -132,6 +133,7 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
         } else {
             delete _operators[msg.sender][_operator];
         }
+        emit ApprovalForAll(msg.sender, _operator, _approved);
     }
 
     /**
@@ -271,6 +273,8 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
 
         _supply++;
         _tokenIds.push(_tokenId);
+
+        emit Transfer(address(0), _to, _tokenId);
     } 
 
 }
