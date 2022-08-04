@@ -35,6 +35,7 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
         override
         returns (uint256)
     {
+        require(_owner != address(0), "Cannot query zero address");
         return _balances[_owner];
     }
 
