@@ -252,7 +252,12 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
         override
         returns (bool)
     {
-        return false;
+        return 
+            interfaceId == 0x01ffc9a7 || // ERC165
+            interfaceId == 0x80ac58cd || // ERC721
+            interfaceId == 0x5b5e139f || // ERC721Metadata
+            interfaceId == 0x780e9d63 // ERC721Enumerable
+        ;
     }
 
     // Other
