@@ -181,10 +181,10 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
     /**
      * 
      */
-    function tokenURI(uint256 tokenId)
+    function tokenURI(uint256 _tokenId)
         public
         view
-        override
+        virtual
         returns (string memory)
     {
         return "";
@@ -264,6 +264,10 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
     }
 
     // Other
+
+    function exists(uint256 _tokenId) public view returns(bool) {
+        return _owners[_tokenId] != address(0);
+    }
 
     function mint(address _to, uint256 _tokenId) internal {
         require(msg.sender == _to, "You can only mint for yourself!");
