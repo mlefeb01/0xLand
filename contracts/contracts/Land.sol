@@ -19,7 +19,7 @@ contract Land is ERC721Impl {
     constructor() ERC721Impl("0xLand", "0XLAND") {}
 
     function claim(int128 x, int128 z) public {
-        int256 hash = (x << 32) | z;
+        int256 hash = (int256(x) << 128) | z;
 
         require(!_claimed[hash], "This chunk has already been claimed!");
 
