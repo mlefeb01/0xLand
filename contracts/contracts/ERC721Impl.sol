@@ -112,13 +112,17 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
      * 
      */
     function approve(address _approved, uint256 _tokenId) public override {
+            require(exists(_tokenId), "Invalid tokenId");
+
             address owner = _owners[_tokenId];
             require(msg.sender == owner || _operators[owner][msg.sender], "You are not owner or operator");
+
             if (_approved == address(0)) {
                 delete _approvals[_tokenId];
             } else {
                 _approvals[_tokenId] = _approved;
             }
+
             emit Approval(owner, _approved, _tokenId);
     }
 
@@ -129,11 +133,15 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
         public
         override
     {
+        require(msg.sender != _operator, "You cant approve yourself!");
+        require(_operator != address(0), "You cannot approve zero address");
+
         if (_approved) {
             _operators[msg.sender][_operator] = true;
         } else {
             delete _operators[msg.sender][_operator];
         }
+
         emit ApprovalForAll(msg.sender, _operator, _approved);
     }
 
@@ -187,6 +195,7 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
         virtual
         returns (string memory)
     {
+        require(exists(_tokenId), "Invalid tokenId");
         return "";
     }
 
@@ -269,7 +278,7 @@ abstract contract ERC721Impl is IERC721, IERC721Enumerable, IERC721Metadata {
         return _owners[_tokenId] != address(0);
     }
 
-    function mint(address _to, uint256 _tokenId) internal {
+    function mint(address _to, uint256 _tokenId) internal virtual {
         require(msg.sender == _to, "You can only mint for yourself!");
         require(_owners[_tokenId] == address(0), "NFT with this tokenID already exists!");
 
