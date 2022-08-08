@@ -16,39 +16,45 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.web3j</groupId>
-                <artifactId>web3j-maven-plugin</artifactId>
-                <version>4.5.11</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>shade</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <packageName>com.zuehlke.blockchain.model</packageName>
-                    <sourceDestination>src/main/java/generated</sourceDestination>
-                    <nativeJavaType>true</nativeJavaType>
-                    <outputFormat>java,bin</outputFormat>
-                    <soliditySourceFiles>
-                        <directory>src/main/resources</directory>
-                        <includes>
-                            <include>**/*.sol</include>
-                        </includes>
-                    </soliditySourceFiles>
-                    <outputDirectory>
-                        <java>src/java/generated</java>
-                        <bin>src/bin/generated</bin>
-                        <abi>src/abi/generated</abi>
-                    </outputDirectory>
-                    <contract>
-                        <includes>
-                            <include>greeter</include>
-                        </includes>
-                        <excludes>
-                            <exclude>mortal</exclude>
-                        </excludes>
-                    </contract>
-                    <pathPrefixes>
-                        <pathPrefix>dep=../dependencies</pathPrefix>
-                    </pathPrefixes>
+                    <minimizeJar>true</minimizeJar>
+                    <finalName>${project.name}-${project.version}</finalName>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
     <repositories>
@@ -76,7 +82,15 @@
         <dependency>
             <groupId>org.web3j</groupId>
             <artifactId>core</artifactId>
-            <version>5.0.0</version>
+            <version>4.8.7</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

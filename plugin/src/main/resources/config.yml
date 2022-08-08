@@ -1,0 +1,5 @@
+address: "0x2171d9963B9ABEC6BDE6BFF4ab1FB74a7623b283"
+network: "http://localhost:7545/"
+privateKey: "c03be8b6f455394ca2f7a07665cbc183d599b52db2de5a5900af257dd7c9afbc"
+gasPrice: 20000000000L
+gasLimit: 6721975

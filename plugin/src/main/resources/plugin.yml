@@ -3,3 +3,11 @@ author: Matt Lefebvre
 api-version: 1.19
 main: io.zeroexland.ZeroExLandPlugin
 version: 1.0
+
+commands:
+  link:
+    description: Command used to link address
+  chunktp:
+    description: Command used to tp to a chunk
+  chunks:
+    description: Command used to see chunks a player owns
