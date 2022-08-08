@@ -24,10 +24,36 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <link rel="stylesheet" href="src/index.css"
     <title>React App</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+    <center><h1>0xLand</h1></center>
+
+      <div class="buttons">
+        <center><button onclick="walletStatus()">Connect Wallet</button>
+
+        <script>
+          function walletStatus() {
+            alert("Connected Wallet")
+          }
+
+        </script>
+
+        <br><button onclick="mintResult()">Mint</button>
+
+        <script>
+          function mintResult(){
+            alert("X: ")
+            alert("Y: ")
+          }
+        </script>
+
+      </div>
+    
+    
     <div id="root"></div>
     <!--
       This HTML file is a template.
