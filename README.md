@@ -56,5 +56,5 @@ https://youtu.be/90hDuw4OJ6c
 
 ## Contributors
 
-* Matt Lefebvre (lefebvre@wit.edu), Team Lead
+* Matt Lefebvre (lefebvrem@wit.edu), Team Lead
 * Munir Baara (baaram@wit.edu), Developer
