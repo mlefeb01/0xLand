@@ -16,7 +16,7 @@ function App() {
   // account will be null if unauthed, nonnull if authed
   const { status, connect, account, chainId, ethereum } = useMetaMask();
 
-  const [state, setState] = useState({ x: 0, z: 0});
+  const [state, setState] = useState({ x: 0, z: 0 });
 
   function formatAddress(account) {
     return account.substring(0, 5) + '...' + account.substring(account.length - 4);
@@ -32,12 +32,13 @@ function App() {
     setState(state);
   }
 
-  function mint() {
-    //landContract.methods.totalSupply().call().then(resp => console.log(resp));
-    landContract.methods.claim(state.x, state.z).send({ from: account, gas: 5000000 }, function(error, hash) {
-      console.log(error);
-      console.log(hash);
-    });
+  async function mint() {
+    try {
+      await landContract.methods.claim(state.x, state.z).send({ from: account, gas: 5000000 });
+      alert('Minted successfully');
+    } catch (e) {
+      alert('Mint failed');
+    }
   }
 
   return (
