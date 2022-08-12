@@ -5,6 +5,10 @@ import "@openzeppelin/contracts/utils/Base64.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract Land is ERC721Impl {
+    int128 constant public MIN_X = -1874999;
+    int128 constant public MAX_X = 1874998;
+    int128 constant public MIN_Z = -1874999;
+    int128 constant public MAX_Z = 1874998;
 
     struct Chunk {
         int128 x;
@@ -19,6 +23,9 @@ contract Land is ERC721Impl {
     constructor() ERC721Impl("0xLand", "0XLAND") {}
 
     function claim(int128 x, int128 z) public {
+        require(x >= MIN_X && x <= MAX_X, "X is out of bounds!");
+        require(z >= MIN_Z && z <= MAX_Z, "Z is out of bounds!");
+
         int256 hash = (int256(x) << 128) | z;
 
         require(!_claimed[hash], "This chunk has already been claimed!");

@@ -35,6 +35,54 @@ contract("Land claim", (accounts) => {
         );
     })
 
+    it("should throw when claim is called on a chunk with an x less than min_x", async () => {
+        const contract = await Land.deployed();
+        const account = accounts[0];
+        const x = -18759990;
+        const z = 0;
+
+        await truffleAssert.fails(
+            contract.claim(x, z),
+            truffleAssert.ErrorType.REVERT
+        );
+    });
+
+    it("should throw when claim is called on a chunk with an x greater than max_x", async () => {
+        const contract = await Land.deployed();
+        const account = accounts[0];
+        const x = 18749980;
+        const z = 0;
+
+        await truffleAssert.fails(
+            contract.claim(x, z),
+            truffleAssert.ErrorType.REVERT
+        );
+    });
+
+    it("should throw when claim is called on a chunk with an z less than min_z", async () => {
+        const contract = await Land.deployed();
+        const account = accounts[0];
+        const x = 0;
+        const z = -18749990;
+
+        await truffleAssert.fails(
+            contract.claim(x, z),
+            truffleAssert.ErrorType.REVERT
+        );
+    });
+
+    it("should throw when claim is called on a chunk with an z greater than max_x", async () => {
+        const contract = await Land.deployed();
+        const account = accounts[0];
+        const x = 18749980;
+        const z = 0;
+
+        await truffleAssert.fails(
+            contract.claim(x, z),
+            truffleAssert.ErrorType.REVERT
+        );
+    });
+
 });
 
 contract("Land tokenURI", (accounts) => {
