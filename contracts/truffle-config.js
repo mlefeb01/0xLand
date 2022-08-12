@@ -5,7 +5,7 @@
  * them to suit your project as necessary.
  *
  * More information about configuration can be found at:
- * 
+ *
  * https://trufflesuite.com/docs/truffle/reference/configuration
  *
  * To deploy via Infura you'll need a wallet provider (like @truffle/hdwallet-provider)
@@ -18,9 +18,9 @@
  *
  */
 
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-const fs = require('fs');
-const mnemonic = JSON.parse(fs.readFileSync("./secret.json").toString()).mnemonic;
+//const HDWalletProvider = require('@truffle/hdwallet-provider');
+//const fs = require('fs');
+//const mnemonic = JSON.parse(fs.readFileSync("./secret.json").toString()).mnemonic;
 
 module.exports = {
   /**
@@ -58,12 +58,12 @@ module.exports = {
     //
     // Useful for deploying to a public network.
     // Note: It's important to wrap the provider as a function to ensure truffle uses a new provider every time.
-    goerli: {
-      provider: () => new HDWalletProvider(mnemonic, `https://goerli.infura.io/v3/a829a673a5a74985a0d99a401982c941`),
-      network_id: '5',
-      gas: 5500000,
-      gasPrice: 10000000000,
-    },
+    //goerli: {
+    //  provider: () => new HDWalletProvider(mnemonic, `https://goerli.infura.io/v3/a829a673a5a74985a0d99a401982c941`),
+    //  network_id: '5',
+    //  gas: 5500000,
+    //  gasPrice: 10000000000,
+    //},
     //
     // Useful for private networks
     // private: {
