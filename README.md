@@ -28,6 +28,7 @@ Web App (React)
 3. Smart Contracts
 
         > cd contracts
+        > npm install
         > truffle test
         Edit the truffle-config.js deployments section
         > nano truffle-config.js
